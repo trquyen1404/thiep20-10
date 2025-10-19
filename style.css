@@ -1,0 +1,155 @@
+/* Thiết lập font chữ và nền */
+body {
+    /* Sử dụng font chữ đẹp từ Google Fonts */
+    font-family: 'Quicksand', sans-serif;
+    background: linear-gradient(135deg, #fce4ec, #f8bbd0);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+/* --- Phần Thiệp Mở (Nội dung) --- */
+
+.card-content {
+    /* QUAN TRỌNG: Ban đầu ẩn đi và định dạng hiển thị */
+    display: none; 
+    text-align: center;
+    font-family: 'Quicksand', sans-serif;
+    padding: 20px;
+    max-width: 600px;
+    margin: 0 auto;
+    border-radius: 16px;
+    background: #fffafc;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+    animation: fadeIn 1s ease forwards;
+    
+    /* Giới hạn chiều cao và bật cuộn */
+    max-height: 80vh;          /* chỉ chiếm tối đa 80% màn hình */
+    overflow-y: auto;           /* bật thanh cuộn dọc */
+    scroll-behavior: smooth;    /* cuộn mượt */
+}
+
+/* Thanh cuộn dễ thương (ẩn hoặc làm mảnh đi) */
+.card-content::-webkit-scrollbar {
+  width: 6px;
+}
+.card-content::-webkit-scrollbar-thumb {
+  background: rgba(255, 105, 135, 0.4);
+  border-radius: 10px;
+}
+.card-content::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* --- Phần Thiệp Đóng --- */
+
+.card-container {
+    perspective: 1000px; /* Tạo hiệu ứng 3D */
+}
+
+.card-closed {
+    width: 350px;
+    background: white;
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    color: #333;
+
+    /* Hiệu ứng "từ từ hiện ra" */
+    opacity: 0;
+    transform: scale(0.8) rotateY(-30deg);
+    animation: fadeInClosed 1.5s ease-out 0.5s forwards; 
+}
+
+/* Định nghĩa hiệu ứng fadeIn cho thiệp đóng */
+@keyframes fadeInClosed {
+    to {
+        opacity: 1;
+        transform: scale(1) rotateY(0deg);
+    }
+}
+
+.card-closed h2 {
+    font-family: 'Dancing Script', cursive;
+    font-size: 2.5em;
+    color: #e91e63;
+    margin-top: 0;
+}
+
+#open-button {
+    background: linear-gradient(135deg, #e91e63, #ad1457);
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    font-size: 16px;
+    font-weight: 600;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    margin-top: 20px;
+}
+
+#open-button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 10px 20px rgba(233, 30, 99, 0.3);
+}
+
+/* Định dạng nội dung thiệp mở */
+.card-content img {
+    max-width: 100%;
+    border-radius: 15px;
+    margin-bottom: 25px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.card-content h1 {
+    font-family: 'Dancing Script', cursive;
+    font-size: 3em;
+    color: #e91e63;
+    margin-bottom: 15px;
+}
+
+.card-content p {
+    font-size: 1.2em;
+    line-height: 1.7;
+    color: #555;
+    /* Đảm bảo chiều rộng hợp lý cho hiệu ứng gõ chữ */
+    min-height: 200px; 
+    text-align: left;
+    white-space: pre-wrap; /* Quan trọng để giữ định dạng xuống dòng */
+}
+
+/* Hiệu ứng zoomIn khi mở thiệp */
+@keyframes zoomIn {
+    from {
+        opacity: 0;
+        transform: scale(0.5);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Hiệu ứng trái tim đập */
+.heart {
+    width: 100px;
+    height: 100px;
+    /* Sử dụng SVG data URL cho trái tim màu đỏ */
+    background: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0iI2U5MWU2MyI+PHBhdGggZD0iTTEyIDIxLjM1bC0xLjQ1LTEuMzJDMTAuNCA1LjE3IDIgMy42IDIgMTIuMjRDMiA5LjI3IDQuMjcgNyA3LjI3IDdDOC44OCA3IDEwLjM1IDcuODQgMTEuMzUuOUMxMi4zNSA3Ljg0IDEzLjc3IDcgMTUuMzggN0MxOC4zOCA3IDIwLjYzIDkuMjcgMjAuNjMgMTIuMjRDMjAuNjMgMTcuMTcgMTIuMTIgMjEuMzUgMTIgMjEuMzVaIi8+PC9zdmc+") center no-repeat;
+    background-size: contain;
+    margin: 30px auto 0;
+    animation: beat 1s infinite;
+}
+
+@keyframes beat {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+}
